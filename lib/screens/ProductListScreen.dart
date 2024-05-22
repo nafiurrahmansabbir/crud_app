@@ -90,16 +90,19 @@ class _ProductListScreenState extends State<ProductListScreen> {
 
   Widget _buildProductItem(ProductModel product) {
     return ListTile(
-      // leading: Image.network(
-      //   image,
-      //   height: 2,
-      //   width: 2,
-      // ),
-      leading: Image.network(product.image.toString()),
+      leading: Image.network(
+        product.image.toString(),
+        errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+          return Image.asset('assets/Error/error2.jpg'); // Path to your local fallback image
+        },
+      ),
+
+      // leading: Image.network(product.image.toString(),),
       title: Text(product.productName ?? 'Unknown'),
       subtitle: Wrap(
         spacing: 16,
         children: [
+
           Text('Unit Price: ${product.unitPrice}'),
           Text('Quantity : ${product.quantity}'),
           Text('Total Price: ${product.totalPrice}'),
